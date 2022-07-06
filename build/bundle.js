@@ -28215,7 +28215,7 @@ var require_isURL = __commonJS({
       if (!options.allow_query_components && (url.includes("?") || url.includes("&"))) {
         return false;
       }
-      var protocol, auth, host, hostname, port2, port_str, split, ipv6;
+      var protocol, auth, host, hostname, port, port_str, split, ipv6;
       split = url.split("#");
       url = split.shift();
       split = url.split("?");
@@ -28276,8 +28276,8 @@ var require_isURL = __commonJS({
         }
       }
       if (port_str !== null && port_str.length > 0) {
-        port2 = parseInt(port_str, 10);
-        if (!/^[0-9]+$/.test(port_str) || port2 <= 0 || port2 > 65535) {
+        port = parseInt(port_str, 10);
+        if (!/^[0-9]+$/.test(port_str) || port <= 0 || port > 65535) {
           return false;
         }
       } else if (options.require_port) {
@@ -35407,7 +35407,6 @@ var userRoutes_default = router2;
 // src/server.ts
 var app = (0, import_express2.default)();
 import_dotenv.default.config();
-var port = +process.env.PORT || 3e3;
 app.use(import_express2.default.json({ limit: "2mb" }));
 app.use(import_express2.default.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
@@ -35415,8 +35414,8 @@ app.get("/", (req, res) => {
 });
 app.use("/user", userRoutes_default);
 app.use("/statistic", statisticRoutes_default);
-app.listen(port, () => {
-  console.info(`Server started at http://localhost:${port}`);
+app.listen(process.env.PORT || 3e3, () => {
+  console.info(`Server started at http://localhost:${process.env.PORT || 3e3}`);
 });
 /*!
  * accepts
