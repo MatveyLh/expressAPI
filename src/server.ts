@@ -6,8 +6,6 @@ import userRoutes from './routes/userRoutes';
 const app = express();
 dotenv.config();
 
-const port: number = +process.env.PORT || 3000;
-
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -18,6 +16,6 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/user', userRoutes);
 app.use('/statistic', statisticRoute);
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.info(`Server started at http://localhost:${port}`);
 });
