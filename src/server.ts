@@ -17,5 +17,5 @@ app.use('/user', userRoutes);
 app.use('/statistic', statisticRoute);
 
 app.listen(process.env.PORT || 3000, () => {
-  console.info(`Server started at http://localhost:${port}`);
+  console.info(`Server started at http://localhost:${process.env.PORT || 3000}`);
 });
