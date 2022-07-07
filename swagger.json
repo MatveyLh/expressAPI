@@ -10,7 +10,7 @@
   "host": "express-softteco.herokuapp.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "consumes": [
     "application/json"
