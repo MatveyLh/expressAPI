@@ -3,12 +3,16 @@ import dotenv from 'dotenv';
 import swaggerDocument from '../swagger.json';
 import statisticRoute from './routes/statisticRoutes';
 import userRoutes from './routes/userRoutes';
+import { Database } from './database';
 
 const swaggerUi = require('swagger-ui-express');
 const cors = require('cors');
 
 const app = express();
 dotenv.config();
+
+// Init global instance for database
+Database.getInstance();
 
 app.use(cors({ credentials: false }));
 app.use(express.json({ limit: '2mb' }));

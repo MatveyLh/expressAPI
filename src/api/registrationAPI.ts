@@ -48,6 +48,7 @@ export class RegistrationAPI {
           user: 'User with current email already exist',
         }]);
       }
+
       registerUserByProvidedData(email, req.body);
 
       return successResponse(req, res, req.body);

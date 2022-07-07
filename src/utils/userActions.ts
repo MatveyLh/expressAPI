@@ -1,13 +1,10 @@
-import { JsonDB } from "node-json-db";
-import { Config } from 'node-json-db/dist/lib/JsonDBConfig';
-import { IUserInfo } from "../interfaces";
-
-const db = new JsonDB(new Config('database', true, false, '/'));
+import { IUserInfo } from '../interfaces';
+import { Database } from '../database';
 
 export function getUserByEmail(email: string) {
-    return db.getData(`/${email}`);
+  return Database.getInstance().database.getData(`/${email}`);
 }
 
 export function registerUserByProvidedData(email: string, userInfo: IUserInfo) {
-    return db.push(`/${email}`, userInfo);
+  return Database.getInstance().database.push(`/${email}`, userInfo);
 }
