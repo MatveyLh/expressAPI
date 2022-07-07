@@ -130,7 +130,7 @@
       "properties": {
         "email": {
           "type": "string",
-          "example": "admin2@softteco.com"
+          "example": "admin@softteco.com"
         },
         "password": {
           "type": "string",
