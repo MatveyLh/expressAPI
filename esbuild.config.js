@@ -5,4 +5,6 @@ esbuild.buildSync({
     bundle: true,
     platform: 'node',
     outfile: './build/bundle.js',
+    external: ['./node_modules/*'],
+    minify: true
 })

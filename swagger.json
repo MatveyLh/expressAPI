@@ -1,0 +1,352 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger SoftTeco frontend task",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user/login": {
+      "post": {
+        "summary": "Login user",
+        "operationId": "loginUser",
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "description": "Data to login user to the app",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user/register": {
+      "post": {
+        "summary": "Register user",
+        "operationId": "registerUser",
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "name": "register",
+            "in": "body",
+            "description": "Register user in app",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/UserRegister"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/statistic/{periodId}": {
+      "get": {
+        "summary": "Get statistic by period id",
+        "operationId": "getStatistic",
+        "tags": [
+          "statistic"
+        ],
+        "parameters": [
+          {
+            "name": "periodId",
+            "in": "path",
+            "required": true,
+            "description": "The id of the period to retrieve statistic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "$ref": "#/definitions/Statistic"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LoginUserRequest": {
+      "type": "object",
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "admin2@softteco.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "12345"
+        }
+      }
+    },
+    "RegisterUserRequest": {
+      "type": "object",
+      "required": [
+        "email",
+        "password",
+        "firstName",
+        "lastName"
+      ],
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "example": "admin2@softteco.com"
+            },
+            "password": {
+              "type": "string",
+              "example": "12345"
+            },
+            "firstName": {
+              "type": "string",
+              "example": "Ivan"
+            },
+            "lastName": {
+              "type": "string",
+              "example": "Ivanov"
+            }
+          }
+        }
+      }
+    },
+    "UserLogin": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "UserRegister": {
+      "required": [
+        "email",
+        "password",
+        "firstName",
+        "lastName"
+      ],
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "Statistic": {
+      "required": [
+        "periodId"
+      ],
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "period": {
+              "type": "string",
+              "example": "Last hour"
+            },
+            "errors": {
+              "type": "string",
+              "example": "7%"
+            },
+            "zeroes": {
+              "type": "string",
+              "example": "6.25%"
+            },
+            "timeouts": {
+              "type": "string",
+              "example": "9.5%"
+            },
+            "average": {
+              "type": "string",
+              "example": "8%"
+            },
+            "error500": {
+              "type": "number",
+              "example": 1768
+            },
+            "error501": {
+              "type": "number",
+              "example": 705
+            },
+            "error502": {
+              "type": "number",
+              "example": 331
+            },
+            "otherErrors": {
+              "type": "number",
+              "example": 139
+            },
+            "searches": {
+              "type": "number",
+              "example": 26716
+            },
+            "searchesLastPeriod": {
+              "type": "number",
+              "example": 24842
+            },
+            "mobileTraffic": {
+              "type": "string",
+              "example": "6.75%"
+            },
+            "webTraffic": {
+              "type": "string",
+              "example": "2%"
+            },
+            "clicks": {
+              "type": "number",
+              "example": 711
+            },
+            "clicksLastPeriod": {
+              "type": "number",
+              "example": 211
+            },
+            "bookings": {
+              "type": "number",
+              "example": 151
+            },
+            "bookingsLastPeriod": {
+              "type": "number",
+              "example": 179
+            },
+            "bookingsSTR": {
+              "type": "string",
+              "example": "9.5%"
+            },
+            "bookingsAvgCheck": {
+              "type": "number",
+              "example": 207
+            }
+          }
+        }
+      }
+    },
+    "Error": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "message": {
+          "type": "string",
+          "example": "USER_NOT_FOUND"
+        },
+        "errors": {
+          "type": "array",
+          "example": [
+            {"email": "invalid"}
+          ]
+        }
+      }
+    }
+  }
+}
